@@ -20,3 +20,6 @@ mosquitto_pub -h localhost -t /test -m "This is a message"
 mosquitto_sub -h localhost -t /test
 
 mosquitto_sub -h localhost -t /# -T /data/out -v
+
+
+makefile v pluto program patri k mqtt.h
