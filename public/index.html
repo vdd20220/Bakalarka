@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>MQTT - PLUTO</title>
+    
+    <script src="paho-mqtt.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="demo.js" type="text/javascript"></script>
+ </head>
+<html>
+<title>HTML Tutorial</title>
+    <body>
+
+    <h1>PLUTO SETTINGS</h1>
+
+
+<div class="wrapper">    
+    <table>
+        <tr>
+            <th></th>
+            <th>Frequency in KHz</th>
+            <th>Pluto settings</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>tx frequency:</td>
+            <td><input type="number" id="frequencytx" name="frequencytx" value="435000"></td>
+            <td><button onclick="send_tx()">set</button></td>
+            <td><label id="set_frequency_tx">N/A</label></td>
+            <td>KHz</td>
+            
+        </tr>
+        <tr>
+            <td>rx frequency:</td>
+            <td><input type="number" id="frequencyrx" name="frequencyrx" value="435000"></td>
+            <td><button onclick="send_rx()">set</button></td>
+            <td><label id="set_frequency_rx">N/A</label></td>
+            <td>KHz</td>
+            
+        </tr>
+
+        <tr>
+            <td>Paris speed:</td>
+            <td><input type="number" id="paris_speed" name="paris_speed" value="30" min="5" max="60"></td>
+            <td><button onclick="send_paris_speed()">set</button></td>
+            <td><label id="set_paris_speed">N/A</label></td>
+            <td>PARIS/min</td>
+            
+        </tr>      
+          <tr>
+            <td>Tone frequency</td>
+            <td><input type="number" id="tone_freq" name="tone_freq" value="800" min="800" max="2000"></td>
+            <td><button onclick="send_tone_freq()">set</button></td>
+            <td><label id="set_tone_freq">N/A</label></td>
+            <td>Hz</td>
+            
+        </tr>
+        <tr>
+            <td>space between letters</td>
+            <td><input type="number" id="space" name="space" value="3" min="3" max="60"></td>
+            <td><button onclick="send_space()">set</button></td>
+            <td><label id="set_space">N/A</label></td>
+            <td>dots betwwen symbols</td>
+            
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><button onclick="send_refresh()" style="width:100%">refresh</button></td>
+        </tr>
+    </table>
+
+    <h1>SEND MESSAGE</h1>
+    <table>
+        <tr>
+            <td>send message directly</td>
+            <td><input type="text" maxlength="500" id="my_message" name="my_message" placeholder="text to send"></td>
+            <td><button onclick="send_message()" style="width:100%">send</button></td>
+        </tr>
+        <tr>
+            <td>upload txt file</td>
+            <td><input type="file"  id="message_file" name="message_file" placeholder="file to send"></td>
+            <td><button onclick="load_message_file()" style="width:100%">upload</button></td>
+        </tr>
+
+    </table>
+    
+    <table border="1px solid black">
+        <tr>   
+            <td><label id="load_text_here" name="load_text_here">PARIS</label></td>
+        </tr>
+    </table>
+    <button onclick="send_message_txt()" >send txt file</button><br>
+    <h1 id="Main_heading"> <b>MQTT Dashboard</b></h1><br><br>
+    <form id="connection-information-form">
+       <b>Hostname or IP Address and Port Number:</b> 
+       <input id="host" type="text" name="host" placeholder="broker address" value="localhost">
+        
+       <input id="port" type="text" name="port" value="8080"><br>
+       <b>Username and Password:</b>
+       <input id="username" type="text" name="Username" placeholder="Username"><br>
+       
+       <input id="password" type="password" name="password" placeholder="password"><br>
+       <b>Subscription topic:</b>
+       <input id="topic_s" type="text" name="topic_s" value="#"><br><br>
+       <input type="button" onclick="startConnect()"  value="Connect">
+       <input type="button"  onclick="startDisconnect()" value="Disconnect"> <br>
+       <br><b>Publish Topic and Message:</b>
+       <input id="topic_p" type="text" name="topic_p" placeholder="Publish topic">
+        
+       <input id="Message" type="text" name="message"  placehilder="Message">
+       <input type="button" onclick="publishMessage()" value="Publish">
+    </form>
+    <h1>RECIEVED MESSAGES</h1>
+    <div id="rec_msg">
+    
+    <!--<div> 
+        <canvas id="myChart"
+            width="700" height="300"></canvas> 
+
+          
+    </div> 
+    
+    <script>
+        
+        const ctx = document.getElementById('myChart');
+            
+    const config = {
+    type: 'line',
+    data: data,
+    };
+
+
+           
+        let chart_ref = new Chart(ctx, config);
+    </script>
+    -->
+    <div id="messages"></div>
+
+
+
+
+
+</body>
+</html> 
